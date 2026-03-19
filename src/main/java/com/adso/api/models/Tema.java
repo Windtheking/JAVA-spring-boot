@@ -14,7 +14,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Tema {
-    
+
+    public Tema(Sting tema) {
+        
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

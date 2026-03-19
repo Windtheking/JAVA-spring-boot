@@ -30,8 +30,8 @@ public class AprendicesServices {
     }
 
     // 🔹 UPDATE
-    public int actualizarAprendiz(Integer id, String nombre, Integer edad){
-        return aprendicesRepository.actualizarAprendiz(id, nombre, edad);
+    public int actualizarAprendiz(Integer id, String nombre, String correo, Integer edad){
+        return aprendicesRepository.actualizarAprendiz(id, nombre, correo, edad);
     }
 
     // 🔹 DELETE

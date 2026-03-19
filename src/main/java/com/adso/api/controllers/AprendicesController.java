@@ -37,7 +37,7 @@ public class AprendicesController {
         return aprendicesService.buscarPorIdDeAprendiz(id);
     }
 
-     @PostMapping
+    @PostMapping
     public ResponseEntity<String> crearAprendiz(
             @RequestParam String nombre,
             @RequestParam String correo,
@@ -52,9 +52,10 @@ public class AprendicesController {
     public ResponseEntity<String> actualizarAprendiz(
             @PathVariable Integer id,
             @RequestParam String nombre,
+            @RequestParam String correo,
             @RequestParam Integer edad
     ) {
-        int filas = aprendicesService.actualizarAprendiz(id, nombre, edad);
+        int filas = aprendicesService.actualizarAprendiz(id, nombre, correo, edad);
 
         if (filas == 0) {
             return ResponseEntity.notFound().build();
