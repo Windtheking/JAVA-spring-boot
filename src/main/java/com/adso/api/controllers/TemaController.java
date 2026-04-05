@@ -3,17 +3,17 @@ package com.adso.api.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adso.api.models.Tema;
 import com.adso.api.services.TemaServices;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/temas")
@@ -60,9 +60,34 @@ public class TemaController {
             @RequestParam String tema
     ) {
         temaServices.createTema(tema);
-        return ResponseEntity.ok("Aprendiz creado correctamente");
+        // Nota: crear un Tema no inserta automáticamente una fila en `preferencias`.
+        // La relación pivote debe guardarse explícitamente con una entidad Preferencia.
+        return ResponseEntity.ok("Tema creado correctamente");
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarAprendiz(@PathVariable Integer id) {
+        int rows = temaServices.deleteTema(id);
+        
+        if (rows == 0) {
+            return ResponseEntity.status(404).body("Tema not found, please provide a valid Id") ;
+        }
+        return ResponseEntity.ok("Tema eliminado correctamente");
+    }
 
-
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateTema(
+            @PathVariable Integer id, 
+            @RequestParam String tema
+    ) {
+        Tema temaActualizado = temaServices.updateTema(id, tema);
+        
+        if (temaActualizado == null) {
+            return ResponseEntity.status(404).body("Tema not found, please provide a valid Id");
+        }
+        return ResponseEntity.ok("Tema actualizado correctamente"); 
+    }
 }
+
+
+

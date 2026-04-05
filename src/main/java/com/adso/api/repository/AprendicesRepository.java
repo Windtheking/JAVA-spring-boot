@@ -13,8 +13,7 @@ import jakarta.transaction.Transactional;
 
 
 public interface AprendicesRepository extends JpaRepository<Aprendiz, Integer> {
-    @Query("SELECT a FROM Aprendiz a WHERE a.id = :idAprendiz")
-    List<Aprendiz> buscarPorIdDeAprendiz(@Param("idAprendiz") Integer idAprendiz);
+    
 
     @Modifying
     @Transactional
@@ -31,9 +30,6 @@ public interface AprendicesRepository extends JpaRepository<Aprendiz, Integer> {
     @Query("DELETE FROM Aprendiz a WHERE a.id = :id")
     int eliminarAprendiz(@Param("id") Integer id);
 
-    @Modifying
-    @Transactional
-    @Query(value = "INSERT INTO public.adso_nocturno (nombre, correo, edad) VALUES (:nombre, :correo, :edad)", nativeQuery = true)
-    void crearAprendiz(@Param("nombre") String nombre, @Param("correo") String correo, @Param("edad") Integer edad);
-
 }
+
+
