@@ -22,4 +22,10 @@ public class Aprendiz {
     private String correo;
     private Integer edad;
 
+    // public Aprendiz(String nombre, String correo, Integer edad) {
+    //     this.nombre = nombre;
+    //     this.correo = correo;
+    //     this.edad = edad;
+    // }
+
 }
