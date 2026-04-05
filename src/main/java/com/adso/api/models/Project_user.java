@@ -1,5 +1,7 @@
 package com.adso.api.models;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,23 +12,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tema")
+@Table (name="project_user")
 @Data
 @NoArgsConstructor
-public class Tema {
-
-    public Tema(String tema) {
-        
-    }
+public class Project_user {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    Integer id;
+    @GeneratedValue
+    private UUID id;
+
     
-    @Column(name = "tema")
-    String tema;
-
-
 
 }

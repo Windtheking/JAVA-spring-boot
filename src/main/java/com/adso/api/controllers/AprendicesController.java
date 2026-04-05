@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.adso.api.models.Aprendiz;
 import com.adso.api.services.AprendicesServices;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/aprendices")
+@Tag(name = "aprendices", description = "CRUD protocol for aprendices, for use please review first the TEMAS endpoints and content")
 public class AprendicesController {
 
     private AprendicesServices aprendicesService;
@@ -28,12 +35,16 @@ public class AprendicesController {
 
 
     @GetMapping("/getAllAprendices")
+    @Operation(
+        summary = "Allows to obtain all data from the aprendices tables"
+        )
+    @ApiResponse(responseCode = "200", description = "Aprendiz creado exitosamente")
     public List<Aprendiz> findAll(){
         return aprendicesService.findAll();
     }
     
    @GetMapping("/aprendiz/{id}")
-    public List<Aprendiz> buscarPorIdDeAprendiz(@PathVariable Integer id ){
+    public Aprendiz buscarPorIdDeAprendiz(@PathVariable Integer id ){
         return aprendicesService.buscarPorIdDeAprendiz(id);
     }
 
@@ -41,9 +52,10 @@ public class AprendicesController {
     public ResponseEntity<String> crearAprendiz(
             @RequestParam String nombre,
             @RequestParam String correo,
-            @RequestParam Integer edad
+            @RequestParam Integer edad,
+            @RequestParam Integer temaId
     ) {
-        aprendicesService.crearAprendiz(nombre, correo, edad);
+        aprendicesService.crearAprendiz(nombre, correo, edad, temaId);
         return ResponseEntity.ok("Aprendiz creado correctamente");
     }
 
